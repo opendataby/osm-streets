@@ -1,0 +1,2 @@
+export const SHOW_DETAILS = 'SHOW_DETAILS'
+export const HIDE_DETAILS = 'HIDE_DETAILS'

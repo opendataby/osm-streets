@@ -1,0 +1,61 @@
+html, body, .app, .map {
+  width: 100%;
+  height: 100%;
+}
+
+.details {
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,0.8);
+    z-index: 2000;
+    overflow: auto;
+}
+
+.panel {
+    flex-grow: 1;
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: rgba(255,255,255,0.8);
+    z-index: 2000;
+}
+
+.info, .filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.caption {
+    flex-grow: 1;
+}
+
+.lang {
+    margin: 0 5px;
+}
+
+.filter-caption {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.filter-add {
+    flex-grow: 1;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 66%;
+}
+
+.filter-input {
+    flex-grow: 1;
+    width: 0;
+}
