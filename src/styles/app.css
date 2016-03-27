@@ -37,6 +37,8 @@ html, body, .app, .map {
 
 .lang {
     margin: 0 5px;
+    color: blue;
+    cursor: pointer;
 }
 
 .filter-caption {

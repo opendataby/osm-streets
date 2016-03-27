@@ -5,22 +5,22 @@ import { translate } from '../utils'
 
 export default class Details extends Component {
   static propTypes = {
-    street: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired
+    street_id: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
   }
 
-  render() {
-    const { street_id, data, hideDetails } = this.props
+  render () {
+    const {street_id, data, hideDetails} = this.props
 
-    if (!street_id) {
+    if (!street_id || !data) {
       return null
     }
 
-    let tr = translate.bind(null, data && data.translates)
+    let tr = translate.bind(null, data.translates)
     let street = data.results[street_id]
     let wikidata = data.wd_items[street.w]
 
-    return !!street && <div className='details'>
+    return <div className='details'>
       <h2>{ wikidata.n }</h2>
       <p>{ street.n }, { street.c } - { street.l } { tr('m') }</p>
       <p>{ wikidata.l

@@ -1,15 +1,16 @@
-import $ from 'jquery'
+import fetch from 'isomorphic-fetch'
 
-import { CHANGE_LANGUAGE } from '../constants/Page'
+import { SET_LANGUAGE } from '../constants'
 
 
 export function changeLanguage (lang) {
   return function (dispatch) {
-    $.getJSON('./data/' + lang + '.json').done(function(data) {
-      dispatch({
-        type: CHANGE_LANGUAGE,
-        payload: data
+    fetch('./data/' + lang + '.json')
+      .then(response => response.json())
+      .then(data => dispatch({
+        type: SET_LANGUAGE,
+        payload: data,
       })
-    })
+    )
   }
 }

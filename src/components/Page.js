@@ -1,21 +1,18 @@
 import React, { PropTypes, Component } from 'react'
 
-import { DEFAULT_LANGUAGE, LANGUAGES } from '../constants/Page'
+import { LANGUAGES } from '../constants'
 import { translate } from '../utils'
 
 
 export default class Page extends Component {
   static propTypes = {
     filters: PropTypes.array.isRequired,
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
   }
 
-  render() {
+  render () {
     const {filters, data} = this.props
     let tr = translate.bind(null, data && data.translates)
-    if (!data) {
-      this.props.changeLanguage(DEFAULT_LANGUAGE)
-    }
 
     return <div className='panel'>
       <div className='info'>
@@ -23,10 +20,7 @@ export default class Page extends Component {
         { Object.keys(LANGUAGES).map((lang) => data && lang === data.language
             ? <b>{ LANGUAGES[lang] }</b>
             : <a className='lang'
-                 href={ '#' + lang }
-                 onClick={ this.props.changeLanguage.bind(this, lang) }>
-            { LANGUAGES[lang] }
-          </a>
+                 onClick={ this.props.changeLanguage.bind(this, lang) }>{ LANGUAGES[lang] }</a>
         ) }
       </div>
 

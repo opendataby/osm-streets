@@ -5,38 +5,47 @@ import { connect } from 'react-redux'
 import Map from '../components/Map'
 import Details from '../components/Details'
 import Page from '../components/Page'
+import * as mapActions from '../actions/MapActions'
 import * as detailsActions from '../actions/DetailsActions'
 import * as pageActions from '../actions/PageActions'
 
 
 class App extends Component {
-  render() {
-    const { details, page } = this.props
-    const { showDetails, hideDetails } = this.props.detailsActions
-    const { changeLanguage } = this.props.pageActions
+  render () {
+    const {lang, data, filters, street_id, lat, lon, zoom} = this.props
+    const {positionChanged} = this.props.mapActions
+    const {showDetails, hideDetails} = this.props.detailsActions
+    const {changeLanguage} = this.props.pageActions
+
+    if (!data || lang !== data.language) {
+      changeLanguage(lang)
+    }
 
     return <div className='app'>
-      <Map filters={ page.filters }
-           data={ page.data }
-           showDetails={ showDetails} />
-      <Details street_id={ details.street_id }
-               data={ page.data }
-               hideDetails={ hideDetails } />
+      <Map filters={ filters }
+           data={ data }
+           showDetails={ showDetails}
+           positionChanged={ positionChanged }
+           lat={ lat } lon={ lon } zoom={ zoom }/>
+      <Details street_id={ street_id }
+               data={ data }
+               hideDetails={ hideDetails }/>
       <Page changeLanguage={ changeLanguage }
-            filters={ page.filters }
-            data={ page.data } />
+            filters={ filters }
+            data={ data }/>
     </div>
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
+    mapActions: bindActionCreators(mapActions, dispatch),
     detailsActions: bindActionCreators(detailsActions, dispatch),
-    pageActions: bindActionCreators(pageActions, dispatch)
+    pageActions: bindActionCreators(pageActions, dispatch),
   }
 }
 
