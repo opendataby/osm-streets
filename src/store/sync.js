@@ -1,7 +1,7 @@
 import { LOCATION_CHANGE } from '../constants'
-import { queryWrapper, isStateChanged, isStateWithoutMapChanged } from '../utils'
 
-const defaultSelectLocationState = state => state
+const defaultSelectLocationState = state => state.routing
+const defaultSelectSyncLocationAction = () => 'PUSH'
 
 /**
  * This function synchronizes your history state with the Redux store.
@@ -18,6 +18,7 @@ const defaultSelectLocationState = state => state
 export default function syncHistoryWithStore(history, store, {
   selectLocationState = defaultSelectLocationState,
   adjustUrlOnReplay = true,
+  selectSyncLocationAction = defaultSelectSyncLocationAction,
 } = {}) {
   // Ensure that the reducer is mounted on the store and functioning properly.
   if (typeof selectLocationState(store.getState()) === 'undefined') {
@@ -32,23 +33,10 @@ export default function syncHistoryWithStore(history, store, {
   }
 
   let initialLocation
+  let currentLocation
   let isTimeTraveling
   let unsubscribeFromStore
   let unsubscribeFromHistory
-
-  const storeToLocation = state => {
-    let q = ''
-    if (state.lang) {
-      q = (q ? q + '&' : q) + 'l=' + state.lang
-    }
-    if (state.street_id) {
-      q = (q ? q + '&' : q) + 'id=' + state.street_id
-    }
-    if (state.lat && state.lon && state.zoom) {
-      q = (q ? q + '&' : q) + 'm=' + [state.zoom, state.lat, state.lon].join('/')
-    }
-    return '?' + q
-  }
 
   // What does the store say about current location?
   const getLocationInStore = (useInitialIfEmpty) => {
@@ -61,27 +49,16 @@ export default function syncHistoryWithStore(history, store, {
   if (adjustUrlOnReplay) {
     const handleStoreChange = () => {
       const locationInStore = getLocationInStore(true)
-      if (!locationInStore) {
-        return
-      }
-
-      const state = store.getState()
-      const query = queryWrapper(locationInStore.query)
-      if (!isStateChanged(state, query)) {
+      if (currentLocation === locationInStore) {
         return
       }
 
       // Update address bar to reflect store state
       isTimeTraveling = true
-      const newLocation = history.createLocation(locationInStore.pathname + storeToLocation(state))
-      if (isStateWithoutMapChanged(state, query)) {
-        history.push(newLocation)
-      } else {
-        history.replace(newLocation)
-      }
-      store.dispatch({
-        type: LOCATION_CHANGE,
-        payload: newLocation,
+      currentLocation = locationInStore
+      history.transitionTo({
+        ...locationInStore,
+        action: selectSyncLocationAction(store.getState()),
       })
       isTimeTraveling = false
     }
@@ -96,6 +73,9 @@ export default function syncHistoryWithStore(history, store, {
     if (isTimeTraveling) {
       return
     }
+
+    // Remember where we are
+    currentLocation = location
 
     // Are we being called for the first time?
     if (!initialLocation) {

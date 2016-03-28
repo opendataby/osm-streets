@@ -1,3 +1,6 @@
+import createLocation from 'history/lib/createLocation'
+import { PUSH, REPLACE } from 'history/lib/Actions'
+
 import {
   LOCATION_CHANGE,
   MAP_POSITION_CHANGED,
@@ -6,7 +9,7 @@ import {
   DEFAULT_LANGUAGE, LANGUAGES,
   DEFAULT_POSITION, DEFAULT_ZOOM,
 } from '../constants'
-import { queryWrapper } from '../utils'
+import { queryWrapper, isStateChanged } from '../utils'
 
 
 const initialState = {
@@ -15,38 +18,65 @@ const initialState = {
   filters: [],
   street_id: null,
   locationBeforeTransitions: null,
-  lat: DEFAULT_POSITION[0],
-  lon: DEFAULT_POSITION[1],
-  zoom: DEFAULT_ZOOM,
+  syncHistoryAction: PUSH,
+  lat: null,
+  lon: null,
+  zoom: null,
 }
 
+
+function storeToLocation (state) {
+  let q = ''
+  if (state.lang) {
+    q = (q ? q + '&' : q) + 'l=' + state.lang
+  }
+  if (state.street_id) {
+    q = (q ? q + '&' : q) + 'id=' + state.street_id
+  }
+  if (state.lat && state.lon && state.zoom) {
+    q = (q ? q + '&' : q) + 'm=' + [state.zoom, state.lat, state.lon].join('/')
+  }
+  return '?' + q
+}
+
+function updateLocation (state, action = PUSH) {
+  const old = state.locationBeforeTransitions
+  return {
+    ...state,
+    locationBeforeTransitions: createLocation(old.pathname + storeToLocation(state), action),
+    syncHistoryAction: action,
+  }
+}
 
 export default function rootReducer (state = initialState, {type, payload}) {
   switch (type) {
     case SET_LANGUAGE:
       if (payload) {
-        return {...state, data: payload, lang: payload.language}
+        return updateLocation({...state, data: payload, lang: payload.language})
       }
       return state
 
     case SHOW_DETAILS:
-      return {...state, street_id: payload}
+      return updateLocation({...state, street_id: payload})
 
     case HIDE_DETAILS:
-      return {...state, street_id: null}
+      return updateLocation({...state, street_id: null})
 
     case LOCATION_CHANGE:
       const query = queryWrapper(payload.query)
-      return {...state, locationBeforeTransitions: payload,
-        lang: query.lang in LANGUAGES ? query.lang : state.lang,
-        street_id: query.street_id,
-        zoom: query.zoom || state.zoom,
-        lat: query.lat || state.lat,
-        lon: query.lon || state.lon,
+      if (isStateChanged(state, query)) {
+        return {...state, locationBeforeTransitions: payload,
+          lang: query.lang in LANGUAGES ? query.lang : state.lang,
+          street_id: query.street_id,
+          zoom: state.zoom === null ? query.zoom || DEFAULT_ZOOM : state.zoom,
+          lat: state.lat === null ? query.lat || DEFAULT_POSITION[0] : state.lat,
+          lon: state.lon === null ? query.lon || DEFAULT_POSITION[1] : state.lon,
+        }
       }
+      return state
 
     case MAP_POSITION_CHANGED:
-      return {...state, ...payload}
+      return updateLocation({...state, ...payload}, REPLACE)
 
     default:
       return state

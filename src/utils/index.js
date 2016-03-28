@@ -38,13 +38,9 @@ export function queryWrapper (query) {
   }
 }
 
-export function isStateWithoutMapChanged (state, query) {
-  return state.lang !== query.lang ||
-    state.street_id !== query.street_id
-}
-
 export function isStateChanged (state, query) {
-  return isStateWithoutMapChanged(state, query) || (
+  return state.lang !== query.lang ||
+    state.street_id !== query.street_id || (
       !state.street_id && (
         state.zoom !== query.zoom ||
         state.lat !== query.lat ||

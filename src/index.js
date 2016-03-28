@@ -14,7 +14,11 @@ import syncHistoryWithStore from './store/sync'
 
 const hashHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 const store = configureStore()
-const history = syncHistoryWithStore(hashHistory, store)
+const history = syncHistoryWithStore(hashHistory, store, {
+  selectLocationState: state => state,
+  adjustUrlOnReplay: true,
+  selectSyncLocationAction: state => state.syncHistoryAction,
+})
 
 
 render(

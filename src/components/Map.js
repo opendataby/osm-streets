@@ -23,6 +23,10 @@ export default class Map extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    if (!nextProps.data) {
+      return
+    }
+
     let {showDetails} = this.props
 
     function getGeoJsonObject(id) {
