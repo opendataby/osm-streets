@@ -12,7 +12,7 @@ import * as pageActions from '../actions/PageActions'
 
 class App extends Component {
   render () {
-    const {lang, data, filters, street_id, lat, lon, zoom} = this.props
+    const {lang, data, filters, streetId, lat, lon, zoom} = this.props
     const {positionChanged} = this.props.mapActions
     const {showDetails, hideDetails} = this.props.detailsActions
     const {changeLanguage} = this.props.pageActions
@@ -24,10 +24,11 @@ class App extends Component {
     return <div className='app'>
       <Map filters={ filters }
            data={ data }
+           streetId={ streetId }
            showDetails={ showDetails}
            positionChanged={ positionChanged }
            lat={ lat } lon={ lon } zoom={ zoom }/>
-      <Details street_id={ street_id }
+      <Details streetId={ streetId }
                data={ data }
                hideDetails={ hideDetails }/>
       <Page changeLanguage={ changeLanguage }

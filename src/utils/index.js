@@ -31,7 +31,7 @@ export function queryWrapper (query) {
   const mapLocation = mapToZoomLatLon(query.m)
   return {
     lang: query.l,
-    street_id: query.id,
+    streetId: query.id,
     zoom: mapLocation.zoom,
     lat: mapLocation.lat,
     lon: mapLocation.lon,
@@ -40,8 +40,8 @@ export function queryWrapper (query) {
 
 export function isStateChanged (state, query) {
   return state.lang !== query.lang ||
-    state.street_id !== query.street_id || (
-      !state.street_id && (
+    state.streetId !== query.streetId || (
+      !state.streetId && (
         state.zoom !== query.zoom ||
         state.lat !== query.lat ||
         state.lon !== query.lon

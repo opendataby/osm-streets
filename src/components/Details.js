@@ -5,19 +5,19 @@ import { translate } from '../utils'
 
 export default class Details extends Component {
   static propTypes = {
-    street_id: PropTypes.object.isRequired,
+    streetId: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
   }
 
   render () {
-    const {street_id, data, hideDetails} = this.props
+    const {streetId, data, hideDetails} = this.props
 
-    if (!street_id || !data) {
+    if (!streetId || !data) {
       return null
     }
 
     let tr = translate.bind(null, data.translates)
-    let street = data.results[street_id]
+    let street = data.results[streetId]
     let wikidata = data.wd_items[street.w]
 
     return <div className='details'>

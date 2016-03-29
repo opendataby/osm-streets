@@ -16,7 +16,7 @@ const initialState = {
   lang: DEFAULT_LANGUAGE,
   data: null,
   filters: [],
-  street_id: null,
+  streetId: null,
   locationBeforeTransitions: null,
   syncHistoryAction: PUSH,
   lat: null,
@@ -30,8 +30,8 @@ function storeToLocation (state) {
   if (state.lang) {
     q = (q ? q + '&' : q) + 'l=' + state.lang
   }
-  if (state.street_id) {
-    q = (q ? q + '&' : q) + 'id=' + state.street_id
+  if (state.streetId) {
+    q = (q ? q + '&' : q) + 'id=' + state.streetId
   }
   if (state.lat && state.lon && state.zoom) {
     q = (q ? q + '&' : q) + 'm=' + [state.zoom, state.lat, state.lon].join('/')
@@ -57,17 +57,17 @@ export default function rootReducer (state = initialState, {type, payload}) {
       return state
 
     case SHOW_DETAILS:
-      return updateLocation({...state, street_id: payload})
+      return updateLocation({...state, streetId: payload})
 
     case HIDE_DETAILS:
-      return updateLocation({...state, street_id: null})
+      return updateLocation({...state, streetId: null})
 
     case LOCATION_CHANGE:
       const query = queryWrapper(payload.query)
       if (isStateChanged(state, query)) {
         return {...state, locationBeforeTransitions: payload,
           lang: query.lang in LANGUAGES ? query.lang : state.lang,
-          street_id: query.street_id,
+          streetId: query.streetId,
           zoom: state.zoom === null ? query.zoom || DEFAULT_ZOOM : state.zoom,
           lat: state.lat === null ? query.lat || DEFAULT_POSITION[0] : state.lat,
           lon: state.lon === null ? query.lon || DEFAULT_POSITION[1] : state.lon,
