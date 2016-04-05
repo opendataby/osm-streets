@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-import { SET_LANGUAGE } from '../constants'
+import { SET_LANGUAGE, SWITCH_PANEL } from '../constants'
 
 
 export function changeLanguage (lang) {
@@ -12,5 +12,12 @@ export function changeLanguage (lang) {
         payload: data,
       })
     )
+  }
+}
+
+export function setActivatePanel (panel, streetId) {
+  return {
+    type: SWITCH_PANEL,
+    payload: {panel, streetId},
   }
 }

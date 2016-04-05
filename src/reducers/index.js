@@ -2,10 +2,11 @@ import createLocation from 'history/lib/createLocation'
 import { PUSH, REPLACE } from 'history/lib/Actions'
 
 import {
-  LOCATION_CHANGE,
+  LOCATION_CHANGE, SWITCH_PANEL,
   MAP_POSITION_CHANGED,
   SET_LANGUAGE,
-  SHOW_DETAILS, HIDE_DETAILS,
+  SHOW_DETAILS,
+  PANEL_MAP, PANEL_FILTERS, PANEL_DETAILS,
   DEFAULT_LANGUAGE, LANGUAGES,
   DEFAULT_POSITION, DEFAULT_ZOOM,
 } from '../constants'
@@ -22,6 +23,7 @@ const initialState = {
   lat: null,
   lon: null,
   zoom: null,
+  panel: PANEL_FILTERS,
 }
 
 
@@ -56,11 +58,11 @@ export default function rootReducer (state = initialState, {type, payload}) {
       }
       return state
 
-    case SHOW_DETAILS:
-      return updateLocation({...state, streetId: payload})
+    case SWITCH_PANEL:
+      return updateLocation({...state, ...payload})
 
-    case HIDE_DETAILS:
-      return updateLocation({...state, streetId: null})
+    case SHOW_DETAILS:
+      return updateLocation({...state, streetId: payload, panel: 'details'})
 
     case LOCATION_CHANGE:
       const query = queryWrapper(payload.query)
@@ -68,6 +70,7 @@ export default function rootReducer (state = initialState, {type, payload}) {
         return {...state, locationBeforeTransitions: payload,
           lang: query.lang in LANGUAGES ? query.lang : state.lang,
           streetId: query.streetId,
+          panel: state.panel === PANEL_MAP ? PANEL_MAP : query.streetId ? PANEL_DETAILS : PANEL_FILTERS,
           zoom: state.zoom === null ? query.zoom || DEFAULT_ZOOM : state.zoom,
           lat: state.lat === null ? query.lat || DEFAULT_POSITION[0] : state.lat,
           lon: state.lon === null ? query.lon || DEFAULT_POSITION[1] : state.lon,

@@ -1,12 +1,17 @@
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE'
+export const SWITCH_PANEL= 'SWITCH_PANEL'
 export const MAP_POSITION_CHANGED = 'MAP_POSITION_CHANGED'
 export const SET_LANGUAGE = 'SET_LANGUAGE'
 export const SHOW_DETAILS = 'SHOW_DETAILS'
-export const HIDE_DETAILS = 'HIDE_DETAILS'
 export const ADD_FILTER = 'ADD_FILTER'
 export const SEARCH_FILTER = 'SEARCH_FILTER'
 export const CHANGE_FILTER = 'CHANGE_FILTER'
 export const REMOVE_FILTER = 'REMOVE_FILTER'
+
+export const PANEL_MAP = 'map'
+export const PANEL_FILTERS = 'filters'
+export const PANEL_DETAILS = 'details'
+export const PANEL_INFO = 'info'
 
 export const DEFAULT_POSITION = [54, 28]
 export const DEFAULT_ZOOM = 7
