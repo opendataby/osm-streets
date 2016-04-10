@@ -46,7 +46,7 @@ export default class Details extends Component {
           <b className='details-item-name'>{ data.wd_properties[prop] }</b>:{ debugInfo(prop) }<br/>
           { wikidata.p[prop].map((propValue) => typeof propValue === 'string' && propValue.startsWith('Q')
             ? <span>{ data.wd_items[propValue].n || propValue }{ debugInfo(propValue) }<br/></span>
-            : propValue
+            : <span>{ propValue }<br/></span>
           ) }
         </p>
         : '') }
