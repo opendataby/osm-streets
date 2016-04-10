@@ -35,6 +35,13 @@ class App extends Component {
              data={ data }/>
     </div>
   }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.data !== this.props.data
+      || nextProps.filters !== this.props.filters
+      || nextProps.streetId !== this.props.streetId
+      || nextProps.panel !== this.props.panel
+  }
 }
 
 function mapStateToProps (state) {

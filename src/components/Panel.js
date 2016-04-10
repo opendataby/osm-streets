@@ -11,7 +11,9 @@ import { translate } from '../utils'
 export default class Page extends Component {
   static propTypes = {
     filters: PropTypes.array.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object,
+    streetId: PropTypes.string,
+    panel: PropTypes.string.isRequired,
   }
 
   render () {
@@ -59,5 +61,12 @@ export default class Page extends Component {
         ? <Info data={ data }/>
         : '' }
     </div>
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.data !== this.props.data
+      || nextProps.filters !== this.props.filters
+      || nextProps.streetId !== this.props.streetId
+      || nextProps.panel !== this.props.panel
   }
 }

@@ -29,6 +29,8 @@ export const LANGUAGES = {
   'en': 'en',
 }
 
+export const DEBUG = false
+
 export const DEFAULT_FILTERS = [
   'name',
   'city',
@@ -36,6 +38,17 @@ export const DEFAULT_FILTERS = [
   'P21',     // sex
   'P569',    // birth date
   'P570',    // death date
+  'P27',     // citizenship
+  'P106',    // occupation
+]
+
+export const IMAGE_PROP = 'P18' 
+export const DEFAULT_DETAILS = [
+  'P21',     // sex
+  'P569',    // birth date
+  'P19',     // place of birth
+  'P570',    // death date
+  'P20',     // place of death
   'P27',     // citizenship
   'P106',    // occupation
 ]

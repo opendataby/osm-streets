@@ -3,7 +3,7 @@ import React, { PropTypes, Component } from 'react'
 
 export default class Info extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object,
   }
 
   render () {
@@ -16,5 +16,9 @@ export default class Info extends Component {
     return <div className='info'>
       <p>Info Page</p>
     </div>
+  }
+  
+  shouldComponentUpdate (nextProps) {
+    return nextProps.data !== this.props.data
   }
 }

@@ -7,7 +7,8 @@ import { TILE_TEMPLATE,  TILE_OPTIONS } from '../constants'
 export default class Map extends Component {
   static propTypes = {
     filters: PropTypes.array.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object,
+    streetId: PropTypes.string,
   }
 
   componentDidMount () {

@@ -27,5 +27,5 @@ render(
       <Route path='*' component={ App } />
     </Router>
   </Provider>,
-  document.body
+  document.getElementById('app')
 )

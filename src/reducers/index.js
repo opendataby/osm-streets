@@ -41,7 +41,7 @@ function storeToLocation (state) {
   return '?' + q
 }
 
-function updateLocation (state, action = PUSH) {
+function updateLocationFromState (state, action = PUSH) {
   const old = state.locationBeforeTransitions
   return {
     ...state,
@@ -50,36 +50,41 @@ function updateLocation (state, action = PUSH) {
   }
 }
 
+function updateStateFromLocation (state, locationBeforeTransitions) {
+  const query = queryWrapper(locationBeforeTransitions.query)
+  if (isStateChanged(state, query)) {
+    return {
+      ...state, locationBeforeTransitions,
+      lang: query.lang in LANGUAGES ? query.lang : state.lang,
+      streetId: query.streetId,
+      panel: state.panel === PANEL_MAP ? PANEL_MAP : query.streetId ? PANEL_DETAILS : PANEL_FILTERS,
+      zoom: state.zoom === null ? query.zoom || DEFAULT_ZOOM : state.zoom,
+      lat: state.lat === null ? query.lat || DEFAULT_POSITION[0] : state.lat,
+      lon: state.lon === null ? query.lon || DEFAULT_POSITION[1] : state.lon,
+    }
+  }
+  return state
+}
+
 export default function rootReducer (state = initialState, {type, payload}) {
   switch (type) {
     case SET_LANGUAGE:
       if (payload) {
-        return updateLocation({...state, data: payload, lang: payload.language})
+        return updateLocationFromState({...state, data: payload, lang: payload.language})
       }
       return state
 
     case SWITCH_PANEL:
-      return updateLocation({...state, ...payload})
+      return updateLocationFromState({...state, ...payload})
 
     case SHOW_DETAILS:
-      return updateLocation({...state, streetId: payload, panel: 'details'})
+      return updateLocationFromState({...state, streetId: payload, panel: 'details'})
 
     case LOCATION_CHANGE:
-      const query = queryWrapper(payload.query)
-      if (isStateChanged(state, query)) {
-        return {...state, locationBeforeTransitions: payload,
-          lang: query.lang in LANGUAGES ? query.lang : state.lang,
-          streetId: query.streetId,
-          panel: state.panel === PANEL_MAP ? PANEL_MAP : query.streetId ? PANEL_DETAILS : PANEL_FILTERS,
-          zoom: state.zoom === null ? query.zoom || DEFAULT_ZOOM : state.zoom,
-          lat: state.lat === null ? query.lat || DEFAULT_POSITION[0] : state.lat,
-          lon: state.lon === null ? query.lon || DEFAULT_POSITION[1] : state.lon,
-        }
-      }
-      return state
+      return updateStateFromLocation(state, payload)
 
     case MAP_POSITION_CHANGED:
-      return updateLocation({...state, ...payload}, REPLACE)
+      return updateLocationFromState({...state, ...payload}, REPLACE)
 
     default:
       return state

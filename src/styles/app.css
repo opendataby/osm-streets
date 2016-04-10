@@ -1,6 +1,7 @@
-html, body, .app, .map {
-  width: 100%;
-  height: 100%;
+html, body, #app, .app, .map {
+    width: 100%;
+    height: 100%;
+    font: 16px/23px Arial, Helvetica, sans-serif;
 }
 
 .panel {
@@ -107,4 +108,17 @@ html, body, .app, .map {
 .filter-input {
     flex-grow: 1;
     width: 0;
+}
+
+.details-image {
+    width: 200px;
+    float: right;
+}
+
+.details-item {
+    margin: 10px 0;
+}
+
+.details-item-name {
+    font-weight: bold;
 }

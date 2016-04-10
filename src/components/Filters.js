@@ -6,8 +6,8 @@ import { translate } from '../utils'
 
 export default class Filters extends Component {
   static propTypes = {
-    streetId: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
+    filters: PropTypes.array.isRequired,
+    data: PropTypes.object,
   }
 
   render () {
@@ -33,5 +33,9 @@ export default class Filters extends Component {
         </div>
       ) }
     </div>
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.data !== this.props.data || nextProps.filters !== this.props.filters
   }
 }
