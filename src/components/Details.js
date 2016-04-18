@@ -24,28 +24,31 @@ export default class Details extends Component {
 
     function debugInfo (prop) {
       return DEBUG
-        ? <a href={ 'https://www.wikidata.org/wiki/' + prop } target='_blank'>{ prop }</a>
+        ? <span> <a href={ 'https://www.wikidata.org/wiki/' + prop } target='_blank'>{ prop }</a></span>
         : ''
+    }
+
+    function wikiLink (prop, wikipediaName, wikidataName) {
+      return data.wd_items[prop].l
+        ? <a href={ 'https://' + data.language + '.wikipedia.org/wiki/' + data.wd_items[prop].l } target='_blank'>
+          { wikipediaName || data.wd_items[prop].n || prop }{ debugInfo(prop) }<br/>
+        </a>
+        : <a href={ 'https://www.wikidata.org/wiki/' + prop } target='_blank'>
+          { wikidataName || data.wd_items[prop].n || prop }{ debugInfo(prop) }<br/>
+        </a>
     }
 
     return <div className={ classNames('details', {'back-map': backMap})}>
       <p className='details-item'>
         <h2>{ street.n }, { street.c } &ndash; { street.l } { tr('m') }</h2>
-        { wikidata.n }{ debugInfo(street.w) } &ndash; { wikidata.l
-          ? <a href={ 'https://' + data.language + '.wikipedia.org/wiki/' + wikidata.l } target='_blank'>
-            { tr('Wikipedia') }
-          </a>
-          : <a href={ 'https://www.wikidata.org/wiki/' + street.w } target='_blank'>
-            { tr('Wikidata') }
-          </a>
-        }
+        { wikidata.n } &ndash; { wikiLink(street.w, tr('Wikipedia'), tr('Wikidata')) }
       </p>
       { wikidata.p[IMAGE_PROP] ? <img className='details-image' src={ wikidata.p[IMAGE_PROP][0] }/> : ''}
       { DEFAULT_DETAILS.map((prop) => wikidata.p[prop]
         ? <p className='details-item'>
           <b className='details-item-name'>{ data.wd_properties[prop] }</b>:{ debugInfo(prop) }<br/>
           { wikidata.p[prop].map((propValue) => typeof propValue === 'string' && propValue.startsWith('Q')
-            ? <span>{ data.wd_items[propValue].n || propValue }{ debugInfo(propValue) }<br/></span>
+            ? wikiLink(propValue)
             : <span>{ propValue }<br/></span>
           ) }
         </p>
