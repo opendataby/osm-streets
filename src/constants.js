@@ -42,13 +42,21 @@ export const DEFAULT_FILTERS = [
   'P106',    // occupation
 ]
 
-export const IMAGE_PROP = 'P18' 
-export const DEFAULT_DETAILS = [
-  'P21',     // sex
-  'P569',    // birth date
-  'P19',     // place of birth
-  'P570',    // death date
-  'P20',     // place of death
-  'P27',     // citizenship
-  'P106',    // occupation
-]
+export const PROP_INSTANCE_OF = 'P31'
+export const PROP_IMAGE = 'P18'
+export const DETAILS = {
+  'Q5': [      // human
+    'P21',     // sex
+    'P569',    // birth date
+    'P19',     // place of birth
+    'P570',    // death date
+    'P20',     // place of death
+    'P27',     // citizenship
+    'P106',    // occupation
+  ],
+  'Q515': [    // city
+    'P17',     // country
+    'P571',    // inception date
+    'P1082',   // population
+  ],
+}
