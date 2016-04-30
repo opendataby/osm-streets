@@ -31,32 +31,40 @@ export const LANGUAGES = {
 
 export const DEBUG = false
 
-export const DEFAULT_FILTERS = [
-  'name',
-  'city',
-  'length',
-  'P21',     // sex
-  'P569',    // birth date
-  'P570',    // death date
-  'P27',     // citizenship
-  'P106',    // occupation
-]
+export const OSM_CITY = 'city'
+export const OSM_NAME = 'name'
+export const OSM_LENGTH = 'len'
 
 export const PROP_INSTANCE_OF = 'P31'
 export const PROP_IMAGE = 'P18'
+
+export const PROP_SEX = 'P21'
+export const PROP_BIRTH_DATE = 'P569'
+export const PROP_DEATH_DATE = 'P570'
+export const PROP_BIRTH_PLACE = 'P19'
+export const PROP_DEATH_PLACE = 'P20'
+export const PROP_CITIZENSHIP = 'P27'
+export const PROP_OCCUPATION = 'P106'
+
+export const PROP_COUNTRY = 'P17'
+export const PROP_INCEPTION_DATE = 'P571'
+export const PROP_POPULATION = 'P1082'
+
+export const DEFAULT_FILTERS = {}
+
 export const DETAILS = {
-  'Q5': [      // human
-    'P21',     // sex
-    'P569',    // birth date
-    'P19',     // place of birth
-    'P570',    // death date
-    'P20',     // place of death
-    'P27',     // citizenship
-    'P106',    // occupation
+  'Q5': [  // human
+    PROP_SEX,
+    PROP_BIRTH_DATE,
+    PROP_BIRTH_PLACE,
+    PROP_DEATH_DATE,
+    PROP_DEATH_PLACE,
+    PROP_CITIZENSHIP,
+    PROP_OCCUPATION,
   ],
-  'Q515': [    // city
-    'P17',     // country
-    'P571',    // inception date
-    'P1082',   // population
+  'Q515': [  // city
+    PROP_COUNTRY,
+    PROP_INCEPTION_DATE,
+    PROP_POPULATION,
   ],
 }

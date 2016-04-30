@@ -8,6 +8,7 @@ import {
   SHOW_DETAILS,
   PANEL_MAP, PANEL_FILTERS, PANEL_DETAILS,
   DEFAULT_LANGUAGE, LANGUAGES,
+  DEFAULT_FILTERS,
   DEFAULT_POSITION, DEFAULT_ZOOM,
 } from '../constants'
 import { queryWrapper, isStateChanged } from '../utils'
@@ -16,7 +17,8 @@ import { queryWrapper, isStateChanged } from '../utils'
 const initialState = {
   lang: DEFAULT_LANGUAGE,
   data: null,
-  filters: [],
+  cache: {},
+  filters: DEFAULT_FILTERS,
   streetId: null,
   locationBeforeTransitions: null,
   syncHistoryAction: PUSH,
@@ -70,7 +72,7 @@ export default function rootReducer (state = initialState, {type, payload}) {
   switch (type) {
     case SET_LANGUAGE:
       if (payload) {
-        return updateLocationFromState({...state, data: payload, lang: payload.language})
+        return updateLocationFromState({...state, data: payload, cache: {}, lang: payload.language})
       }
       return state
 

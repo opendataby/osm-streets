@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import L from 'leaflet'
 
 import { TILE_TEMPLATE,  TILE_OPTIONS } from '../constants'
+import { updateLookupCache, checkAndGetLookup, filterItem } from '../utils'
 
 
 export default class Map extends Component {
@@ -35,16 +36,28 @@ export default class Map extends Component {
     let selectedStreet = null
     const {showDetails} = this.props
 
-    function getGeoJsonObject(id) {
+    function filterData (id) {
+      let item = nextProps.data.results[id]
+      for (let property of Object.keys(nextProps.filters)) {
+        const filterValue = checkAndGetLookup(property, nextProps.filters[property], nextProps.cache)
+        if (!filterItem(property, item, nextProps.data, filterValue)) {
+          return false
+        }
+      }
+      return true
+    }
+
+    function getGeoJsonObject (id) {
       return {type: 'Feature', id: id, geometry: nextProps.data.results[id].g}
     }
 
     if (this.geojson) {
       this.map.removeLayer(this.geojson)
     }
+    updateLookupCache(Object.keys(nextProps.filters), nextProps.data, nextProps.cache)
     this.geojson = L.geoJson({
       type: 'FeatureCollection',
-      features: Object.keys(nextProps.data.results).map(getGeoJsonObject),
+      features: Object.keys(nextProps.data.results).filter(filterData).map(getGeoJsonObject),
     }, {
       onEachFeature: function (feature, layer) {
         if (feature.id === nextProps.streetId) {
