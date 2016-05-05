@@ -34,15 +34,51 @@ function mapToZoomLatLon (map) {
   }
 }
 
+function queryParamToFilterValue (filter, value) {
+  return [rangeFilter, dateRangeFilter, numericRangeFilter].indexOf(propTypes[filter]) !== -1
+    ? value.split(':')
+      .map((value) => value || null)
+      .map((value) => value && filter === numericRangeFilter ? parseFloat(value) : value)
+    : value
+}
+
+export function filterValueToQueryParam (value) {
+  return value instanceof Array ? value.join(':') : value
+}
+
+export function queryToFilters (queryFilters) {
+  let filters = {}
+  for (let param in queryFilters) {
+    filters[param] = queryParamToFilterValue(param, queryFilters[param])
+  }
+  return filters
+}
+
 export function queryWrapper (query) {
   const mapLocation = mapToZoomLatLon(query.m)
+  let filters = {}
+  for (let param in query) {
+    if (param in propTypes) {
+      filters[param] = query[param]
+    }
+  }
   return {
     lang: query.l,
     streetId: query.id,
     zoom: mapLocation.zoom,
     lat: mapLocation.lat,
     lon: mapLocation.lon,
+    filters: filters,
   }
+}
+
+function isFilterValueEquals (filter, state, query) {
+  let keyInState = filter in state.filters
+  let keyInQuery = filter in query.filters
+  if (keyInQuery && keyInState) {
+    return query.filters[filter] === filterValueToQueryParam(filter, state.filters[filter])
+  }
+  return keyInQuery === keyInState
 }
 
 export function isStateChanged (state, query) {
@@ -53,7 +89,7 @@ export function isStateChanged (state, query) {
         state.lat !== query.lat ||
         state.lon !== query.lon
       )
-    )
+    ) || Object.keys(propTypes).some((filter) => !isFilterValueEquals(filter, state, query))
 }
 
 function equalFilter (itemPropValues, filterValues) {
@@ -94,23 +130,31 @@ function rangeFilter (itemPropValues, filterValues) {
          (max === null || minValue === null || minValue <= max)
 }
 
+function dateRangeFilter (itemPropValues, filterValues) {
+  return rangeFilter(itemPropValues, filterValues)
+}
+
+function numericRangeFilter (itemPropValues, filterValues) {
+  return rangeFilter(itemPropValues, filterValues)
+}
+
 let propTypes = {}
 propTypes[OSM_CITY] = containsFilter
 propTypes[OSM_NAME] = containsFilter
-propTypes[OSM_LENGTH] = rangeFilter
+propTypes[OSM_LENGTH] = numericRangeFilter
 propTypes[PROP_INSTANCE_OF] = equalFilter
 
 propTypes[PROP_SEX] = equalFilter
-propTypes[PROP_BIRTH_DATE] = rangeFilter
+propTypes[PROP_BIRTH_DATE] = dateRangeFilter
 propTypes[PROP_BIRTH_PLACE] = lookupEqualFilter
-propTypes[PROP_DEATH_DATE] = rangeFilter
+propTypes[PROP_DEATH_DATE] = dateRangeFilter
 propTypes[PROP_DEATH_PLACE] = lookupEqualFilter
 propTypes[PROP_CITIZENSHIP] = lookupEqualFilter
 propTypes[PROP_OCCUPATION] = lookupEqualFilter
 
 propTypes[PROP_COUNTRY] = lookupEqualFilter
-propTypes[PROP_INCEPTION_DATE] = rangeFilter
-propTypes[PROP_POPULATION] = rangeFilter
+propTypes[PROP_INCEPTION_DATE] = dateRangeFilter
+propTypes[PROP_POPULATION] = numericRangeFilter
 
 let osmFilters = {}
 osmFilters[OSM_CITY] = 'c'

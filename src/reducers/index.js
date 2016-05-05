@@ -11,7 +11,7 @@ import {
   DEFAULT_FILTERS,
   DEFAULT_POSITION, DEFAULT_ZOOM,
 } from '../constants'
-import { queryWrapper, isStateChanged } from '../utils'
+import { queryWrapper, isStateChanged, queryToFilters, filterValueToQueryParam } from '../utils'
 
 
 const initialState = {
@@ -40,6 +40,9 @@ function storeToLocation (state) {
   if (state.lat && state.lon && state.zoom) {
     q = (q ? q + '&' : q) + 'm=' + [state.zoom, state.lat, state.lon].join('/')
   }
+  for (let filter in state.filters) {
+    q = (q ? q + '&' : q) + filter + '=' + filterValueToQueryParam(state.filters[filter])
+  }
   return '?' + q
 }
 
@@ -63,6 +66,7 @@ function updateStateFromLocation (state, locationBeforeTransitions) {
       zoom: state.zoom === null ? query.zoom || DEFAULT_ZOOM : state.zoom,
       lat: state.lat === null ? query.lat || DEFAULT_POSITION[0] : state.lat,
       lon: state.lon === null ? query.lon || DEFAULT_POSITION[1] : state.lon,
+      filters: queryToFilters(query.filters),
     }
   }
   return state
