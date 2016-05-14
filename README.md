@@ -9,4 +9,4 @@ http://opendataby.github.io/osm_streets/
     ./node_modules/.bin/webpack
 
 ## License
-MIT
+[MIT](https://raw.githubusercontent.com/opendataby/osm_streets/gh-pages/LICENSE.txt)
