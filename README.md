@@ -2,7 +2,7 @@
 OSM streets and wikidata integration
 
 ## Example
-http://opendataby.github.io/osm_streets/
+http://opendataby.github.io/osm-streets/
 
 ## Build
     npm install
