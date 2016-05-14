@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import L from 'leaflet'
 
-import { TILE_TEMPLATE,  TILE_OPTIONS } from '../constants'
+import { TILE_TEMPLATE,  TILE_OPTIONS, PROP_INSTANCE_OF } from '../constants'
 import { updateLookupCache, checkAndGetLookup, filterItem } from '../utils'
 
 
@@ -40,7 +40,7 @@ export default class Map extends Component {
       let item = nextProps.data.results[id]
       for (let property of Object.keys(nextProps.filters)) {
         const filterValue = checkAndGetLookup(property, nextProps.filters[property], nextProps.cache)
-        if (!filterItem(property, item, nextProps.data, filterValue)) {
+        if (!filterItem(property, item, nextProps.data, filterValue, nextProps.filters[PROP_INSTANCE_OF])) {
           return false
         }
       }

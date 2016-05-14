@@ -3,10 +3,7 @@ export const SWITCH_PANEL= 'SWITCH_PANEL'
 export const MAP_POSITION_CHANGED = 'MAP_POSITION_CHANGED'
 export const SET_LANGUAGE = 'SET_LANGUAGE'
 export const SHOW_DETAILS = 'SHOW_DETAILS'
-export const ADD_FILTER = 'ADD_FILTER'
-export const SEARCH_FILTER = 'SEARCH_FILTER'
-export const CHANGE_FILTER = 'CHANGE_FILTER'
-export const REMOVE_FILTER = 'REMOVE_FILTER'
+export const UPDATE_FILTER = 'UPDATE_FILTER'
 
 export const PANEL_MAP = 'map'
 export const PANEL_FILTERS = 'filters'
@@ -48,7 +45,7 @@ export const PROP_COUNTRY = 'P17'
 export const PROP_INCEPTION_DATE = 'P571'
 export const PROP_POPULATION = 'P1082'
 
-export const DEFAULT_FILTERS = {}
+export const DEFAULT_FILTERS = {'P31': 'Q5'}
 
 export const DETAILS = {
   'Q5': [  // human
@@ -65,4 +62,45 @@ export const DETAILS = {
     PROP_INCEPTION_DATE,
     PROP_POPULATION,
   ],
+}
+
+export const PROP_NAMES = {}
+PROP_NAMES[OSM_CITY] = 'city'
+PROP_NAMES[OSM_NAME] = 'street name'
+PROP_NAMES[OSM_LENGTH] = 'length'
+PROP_NAMES[PROP_INSTANCE_OF] = 'instance'
+PROP_NAMES[PROP_SEX] = 'sex'
+PROP_NAMES[PROP_BIRTH_DATE] = 'birth date'
+PROP_NAMES[PROP_BIRTH_PLACE] = 'place of birth'
+PROP_NAMES[PROP_DEATH_DATE] = 'death date'
+PROP_NAMES[PROP_DEATH_PLACE] = 'place of death'
+PROP_NAMES[PROP_CITIZENSHIP] = 'citizenship'
+PROP_NAMES[PROP_OCCUPATION] = 'occupation'
+PROP_NAMES[PROP_COUNTRY] = 'country'
+PROP_NAMES[PROP_INCEPTION_DATE] = 'inception date'
+PROP_NAMES[PROP_POPULATION] = 'population'
+
+export const PROP_PLACEHOLDERS = {}
+PROP_PLACEHOLDERS[OSM_CITY] = 'eg. Miensk'
+PROP_PLACEHOLDERS[OSM_NAME] = 'eg. Skaryny'
+PROP_PLACEHOLDERS[OSM_LENGTH] = ['from', 'to']
+PROP_PLACEHOLDERS[PROP_BIRTH_DATE] = ['from', 'to']
+PROP_PLACEHOLDERS[PROP_BIRTH_PLACE] = 'eg. Minsk'
+PROP_PLACEHOLDERS[PROP_DEATH_DATE] = ['from', 'to']
+PROP_PLACEHOLDERS[PROP_DEATH_PLACE] = 'eg. Minsk'
+PROP_PLACEHOLDERS[PROP_CITIZENSHIP] = 'eg. Belarus'
+PROP_PLACEHOLDERS[PROP_OCCUPATION] = 'eg. writer'
+PROP_PLACEHOLDERS[PROP_COUNTRY] = 'eg. Belarus'
+PROP_PLACEHOLDERS[PROP_INCEPTION_DATE] = ['from', 'to']
+PROP_PLACEHOLDERS[PROP_POPULATION] = ['from', 'to']
+
+export const PROP_SELECTORS = {}
+PROP_SELECTORS[PROP_INSTANCE_OF] = {
+  'Q5': 'human',
+  'Q515': 'city',
+}
+PROP_SELECTORS[PROP_SEX] = {
+  '': 'any',
+  'Q6581097': 'male',
+  'Q6581072': 'female',
 }

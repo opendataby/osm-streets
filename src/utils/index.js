@@ -2,6 +2,7 @@ import {
   OSM_CITY, OSM_NAME, OSM_LENGTH,  PROP_INSTANCE_OF,
   PROP_SEX, PROP_BIRTH_DATE, PROP_BIRTH_PLACE, PROP_DEATH_DATE, PROP_DEATH_PLACE, PROP_CITIZENSHIP, PROP_OCCUPATION,
   PROP_COUNTRY, PROP_INCEPTION_DATE, PROP_POPULATION,
+  DEFAULT_FILTERS, DETAILS,
 } from '../constants'
 
 
@@ -35,7 +36,7 @@ function mapToZoomLatLon (map) {
 }
 
 function queryParamToFilterValue (filter, value) {
-  return [rangeFilter, dateRangeFilter, numericRangeFilter].indexOf(propTypes[filter]) !== -1
+  return isRangeFilter(filter)
     ? value.split(':')
       .map((value) => value || null)
       .map((value) => value && filter === numericRangeFilter ? parseFloat(value) : value)
@@ -47,7 +48,7 @@ export function filterValueToQueryParam (value) {
 }
 
 export function queryToFilters (queryFilters) {
-  let filters = {}
+  let filters = {...DEFAULT_FILTERS}
   for (let param in queryFilters) {
     filters[param] = queryParamToFilterValue(param, queryFilters[param])
   }
@@ -138,7 +139,7 @@ function numericRangeFilter (itemPropValues, filterValues) {
   return rangeFilter(itemPropValues, filterValues)
 }
 
-let propTypes = {}
+export let propTypes = {}
 propTypes[OSM_CITY] = containsFilter
 propTypes[OSM_NAME] = containsFilter
 propTypes[OSM_LENGTH] = numericRangeFilter
@@ -160,6 +161,14 @@ let osmFilters = {}
 osmFilters[OSM_CITY] = 'c'
 osmFilters[OSM_NAME] = 'n'
 osmFilters[OSM_LENGTH] = 'l'
+
+export function isRangeFilter (filter) {
+  return [rangeFilter, dateRangeFilter, numericRangeFilter].indexOf(propTypes[filter]) !== -1
+}
+
+export function isSelectFilter (filter) {
+  return equalFilter === propTypes[filter]
+}
 
 export function updateLookupCache (properties, data, cache) {
   const filterForCaching = properties.filter((property) =>
@@ -202,7 +211,7 @@ export function checkAndGetLookup (property, item, cache) {
   return Object.keys(cache[property]).filter((item_id) => cache[property][item_id].indexOf(item) !== -1)
 }
 
-export function filterItem (property, item, data, filterValue) {
+export function filterItem (property, item, data, filterValue, instance) {
   let filterValues
   if (filterValue instanceof Array) {
     filterValues = filterValue
@@ -212,6 +221,9 @@ export function filterItem (property, item, data, filterValue) {
   if (property in osmFilters) {
     return propTypes[property]([item[osmFilters[property]]], filterValues)
   } else {
+    if (property !== PROP_INSTANCE_OF &&  DETAILS[instance].indexOf(property) === -1) {
+      return true
+    }
     for (let index of item.w.split(';')) {
       const wikidata = data.wd_items[index]
       if (!wikidata.p || !(property in wikidata.p)) {

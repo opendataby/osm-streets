@@ -17,7 +17,7 @@ export default class Page extends Component {
   }
 
   render () {
-    const {filters, data, panel, streetId} = this.props
+    const {filters, data, panel, streetId, updateFilters} = this.props
     let tr = translate.bind(null, data && data.translates)
 
     return <div className='panel'>
@@ -52,7 +52,7 @@ export default class Page extends Component {
         }
       </div>
       { panel === PANEL_FILTERS || panel === PANEL_MAP && !streetId
-        ? <Filters data={ data } filters={ filters } backMap={ panel === PANEL_MAP && !streetId }/>
+        ? <Filters data={ data } filters={ filters } backMap={ panel === PANEL_MAP && !streetId } updateFilters={ updateFilters }/>
         : '' }
       { panel === PANEL_DETAILS || panel === PANEL_MAP && streetId
         ? <Details data={ data } streetId={ streetId } backMap={ panel === PANEL_MAP && streetId }/>

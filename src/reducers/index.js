@@ -2,7 +2,7 @@ import createLocation from 'history/lib/createLocation'
 import { PUSH, REPLACE } from 'history/lib/Actions'
 
 import {
-  LOCATION_CHANGE, SWITCH_PANEL,
+  LOCATION_CHANGE, SWITCH_PANEL, UPDATE_FILTER,
   MAP_POSITION_CHANGED,
   SET_LANGUAGE,
   SHOW_DETAILS,
@@ -79,6 +79,9 @@ export default function rootReducer (state = initialState, {type, payload}) {
         return updateLocationFromState({...state, data: payload, cache: {}, lang: payload.language})
       }
       return state
+
+    case UPDATE_FILTER:
+      return updateLocationFromState({...state, filters: payload})
 
     case SWITCH_PANEL:
       return updateLocationFromState({...state, ...payload})
