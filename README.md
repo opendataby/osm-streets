@@ -7,6 +7,10 @@ http://opendataby.github.io/osm-streets/
 ## Similar projects
 - http://vulica.by/
 - http://news.tut.by/society/398404.html
+- http://minsk.gov.by/ru/streets
+- [http://publib.by/userfiles/file/Их именами.pdf](http://publib.by/userfiles/file/%D0%98%D1%85%20%D0%B8%D0%BC%D0%B5%D0%BD%D0%B0%D0%BC%D0%B8.pdf)
+- http://szlachta.io.ua/s215414/bylyya_i_novyya_nazvy_vulic_i_plyaca_menska
+- http://labadzenka.by/?p=22871
 
 ## Build
     npm install
