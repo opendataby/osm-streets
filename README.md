@@ -4,6 +4,10 @@ OSM streets and wikidata integration
 ## Example
 http://opendataby.github.io/osm-streets/
 
+## Similar projects
+- http://vulica.by/
+- http://news.tut.by/society/398404.html
+
 ## Build
     npm install
     ./node_modules/.bin/webpack
