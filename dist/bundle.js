@@ -18373,11 +18373,33 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'info' },
+	        'Sources – ',
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Info Page'
-	        )
+	          'a',
+	          { href: 'https://github.com/opendataby/osm-streets', target: '_blank' },
+	          'GitHub'
+	        ),
+	        _react2.default.createElement('br', null),
+	        'OSM data – ',
+	        _react2.default.createElement(
+	          'a',
+	          { href: 'https://www.openstreetmap.org/copyright', target: '_blank' },
+	          '© OpenStreetMap contributors'
+	        ),
+	        _react2.default.createElement('br', null),
+	        'Wikidata – ',
+	        _react2.default.createElement(
+	          'a',
+	          { href: 'https://creativecommons.org/licenses/by-sa/3.0/', target: '_blank' },
+	          'CC BY-SA'
+	        ),
+	        ' ',
+	        _react2.default.createElement(
+	          'a',
+	          { href: 'https://www.wikidata.org/', target: '_blank' },
+	          'Wikidata'
+	        ),
+	        _react2.default.createElement('br', null)
 	      );
 	    }
 	  }, {

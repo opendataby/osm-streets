@@ -14,7 +14,9 @@ export default class Info extends Component {
     }
 
     return <div className='info'>
-      <p>Info Page</p>
+      Sources &ndash; <a href='https://github.com/opendataby/osm-streets' target='_blank'>GitHub</a><br/>
+      OSM data &ndash; <a href='https://www.openstreetmap.org/copyright' target='_blank'>© OpenStreetMap contributors</a><br/>
+      Wikidata &ndash; <a href='https://creativecommons.org/licenses/by-sa/3.0/' target='_blank'>CC BY-SA</a> <a href='https://www.wikidata.org/' target='_blank'>Wikidata</a><br/>
     </div>
   }
   

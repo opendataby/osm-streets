@@ -9,4 +9,4 @@ http://opendataby.github.io/osm-streets/
     ./node_modules/.bin/webpack
 
 ## License
-[MIT](https://raw.githubusercontent.com/opendataby/osm_streets/gh-pages/LICENSE.txt)
+Sources - [MIT](https://raw.githubusercontent.com/opendataby/osm_streets/gh-pages/LICENSE.txt), OSM data - [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright), Wikidata - [CC BY-SA](https://creativecommons.org/licenses/by-sa/3.0/) [Wikidata](https://www.wikidata.org/)
