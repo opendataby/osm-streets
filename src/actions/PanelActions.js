@@ -4,6 +4,7 @@ import { SET_LANGUAGE, SWITCH_PANEL } from '../constants'
 
 
 export function changeLanguage (lang) {
+  window.ga('send', 'event', 'app', SET_LANGUAGE, lang)
   return function (dispatch) {
     fetch('./data/' + lang + '.json')
       .then(response => response.json())
@@ -16,6 +17,7 @@ export function changeLanguage (lang) {
 }
 
 export function setActivatePanel (panel, streetId) {
+  window.ga('send', 'event', 'app', SWITCH_PANEL, panel)
   return {
     type: SWITCH_PANEL,
     payload: {panel, streetId},

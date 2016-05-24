@@ -17815,6 +17815,7 @@
 	var _constants = __webpack_require__(28);
 	
 	function showDetails(streetId) {
+	  window.ga('send', 'event', 'app', _constants.SHOW_DETAILS, streetId);
 	  return {
 	    type: _constants.SHOW_DETAILS,
 	    payload: streetId
@@ -17835,6 +17836,7 @@
 	var _constants = __webpack_require__(28);
 	
 	function updateFilters(filters) {
+	  window.ga('send', 'event', 'app', _constants.UPDATE_FILTER, JSON.stringify(filters));
 	  return {
 	    type: _constants.UPDATE_FILTER,
 	    payload: filters
@@ -17855,6 +17857,7 @@
 	var _constants = __webpack_require__(28);
 	
 	function positionChanged(lat, lon, zoom) {
+	  window.ga('send', 'event', 'app', _constants.MAP_POSITION_CHANGED, [zoom, lat, lon].join('/'));
 	  return {
 	    type: _constants.MAP_POSITION_CHANGED,
 	    payload: { lat: lat, lon: lon, zoom: zoom }
@@ -17882,6 +17885,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function changeLanguage(lang) {
+	  window.ga('send', 'event', 'app', _constants.SET_LANGUAGE, lang);
 	  return function (dispatch) {
 	    (0, _isomorphicFetch2.default)('./data/' + lang + '.json').then(function (response) {
 	      return response.json();
@@ -17895,6 +17899,7 @@
 	}
 	
 	function setActivatePanel(panel, streetId) {
+	  window.ga('send', 'event', 'app', _constants.SWITCH_PANEL, panel);
 	  return {
 	    type: _constants.SWITCH_PANEL,
 	    payload: { panel: panel, streetId: streetId }
