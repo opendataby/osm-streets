@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
 
-import { translate, isRangeFilter, isSelectFilter } from '../utils'
+import { isRangeFilter, isSelectFilter } from '../utils'
 import {
   OSM_CITY, OSM_NAME, OSM_LENGTH,
   PROP_INSTANCE_OF, DETAILS, PROP_NAMES, PROP_PLACEHOLDERS, PROP_SELECTORS,
@@ -57,19 +57,19 @@ export default class Filters extends Component {
     this.props.updateFilters(filters)
   }
 
-  renderField (filters, filter, tr) {
+  renderField (filters, filter, i18n) {
     const value = filters[filter]
     if (isRangeFilter(filter)) {
       return <div className='filter-item'>
         <input className='filter-input'
                type='text'
-               placeholder={ PROP_PLACEHOLDERS[filter][0] }
+               placeholder={ i18n.pgettext.apply(i18n, PROP_PLACEHOLDERS[filter][0]) }
                value={ value && value[0] }
                onChange={ this.handleChange.bind(this, filters, filter, 0) }/>
         &nbsp;&ndash;&nbsp;
         <input className='filter-input'
                type='text'
-               placeholder={ PROP_PLACEHOLDERS[filter][1] }
+               placeholder={ i18n.pgettext.apply(i18n, PROP_PLACEHOLDERS[filter][1]) }
                value={ value && value[1] }
                onChange={ this.handleChange.bind(this, filters, filter, 1) }/>
       </div>
@@ -77,7 +77,7 @@ export default class Filters extends Component {
       return <select className='filter-item' onChange={ this.handleChange.bind(this, filters, filter, null) }>
         { Object.keys(PROP_SELECTORS[filter]).map(item =>
           <option value={ item } selected={ item === value ? 'selected' : '' }>
-            { tr(PROP_SELECTORS[filter][item]) }
+            { i18n.pgettext.apply(i18n, PROP_SELECTORS[filter][item]) }
           </option>)
         }
       </select>
@@ -85,7 +85,7 @@ export default class Filters extends Component {
       return <div className='filter-item'>
         <input className='filter-input'
                type='text'
-               placeholder={ PROP_PLACEHOLDERS[filter] }
+               placeholder={ i18n.pgettext.apply(i18n, PROP_PLACEHOLDERS[filter]) }
                value={ value }
                onChange={ this.handleChange.bind(this, filters, filter, null) }/>
       </div>
@@ -93,28 +93,28 @@ export default class Filters extends Component {
   }
 
   render () {
-    const {data, filters, backMap} = this.props
+    const {data, filters, backMap, i18n} = this.props
 
     if (!data) {
       return null
     }
 
-    let tr = translate.bind(null, data.translates)
     let stats = this.calculateStats(data, Object.keys(data.results))
     let fullFilters = this.fullFilters(filters)
     let newFilters = {...filters}
 
     return <div className={ classNames('filters', {'back-map': backMap})}>
       <div className='filter-stats'>
-        { stats.streetsCount } { tr('streets') }&nbsp;
-        { tr('with summary length') } { stats.streetsLength } { tr('m') }&nbsp;
-        { tr('in') } { stats.citiesCount } { tr('cities') }
+        { stats.streetsCount } { i18n.ngettext('street', 'streets', stats.streetsCount) }&nbsp;
+        { i18n.gettext('with summary length') }&nbsp;
+          { stats.streetsLength } { i18n.ngettext('meter in', 'meters in', stats.streetsLength) }&nbsp;
+        { stats.citiesCount } { i18n.npgettext('in', 'city', 'cities', stats.citiesCount) }
       </div>
 
       { Object.keys(fullFilters).map((filter) =>
         <div className='filter'>
-          <h3 className='filter-caption'>{ tr(PROP_NAMES[filter]) }:</h3>
-          { this.renderField(newFilters, filter, tr) }
+          <h3 className='filter-caption'>{ i18n.pgettext.apply(i18n, PROP_NAMES[filter]) }:</h3>
+          { this.renderField(newFilters, filter, i18n) }
         </div>
       ) }
     </div>

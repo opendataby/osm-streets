@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
 
 import { DETAILS, PROP_INSTANCE_OF, PROP_IMAGE, DEBUG } from '../constants'
-import { translate } from '../utils'
 
 
 export default class Details extends Component {
@@ -12,13 +11,12 @@ export default class Details extends Component {
   }
 
   render () {
-    const {streetId, data, backMap} = this.props
+    const {streetId, data, backMap, i18n} = this.props
 
     if (!streetId || !data) {
       return null
     }
 
-    let tr = translate.bind(null, data.translates)
     let street = data.results[streetId]
     let wikidata = data.wd_items[street.w]
     let details = null
@@ -47,8 +45,8 @@ export default class Details extends Component {
 
     return <div className={ classNames('details', {'back-map': backMap})}>
       <p className='details-item'>
-        <h2>{ street.n }, { street.c } &ndash; { street.l } { tr('m') }</h2>
-        { wikidata.n } &ndash; { wikiLink(street.w, tr('Wikipedia'), tr('Wikidata')) }
+        <h2>{ street.n }, { street.c } &ndash; { street.l } { i18n.ngettext('meter', 'meters', street.l) }</h2>
+        { wikidata.n } &ndash; { wikiLink(street.w, i18n.gettext('Wikipedia'), i18n.gettext('Wikidata')) }
       </p>
       { wikidata.p[PROP_IMAGE] ? <img className='details-image' src={ wikidata.p[PROP_IMAGE][0] }/> : ''}
       { details.map((prop) => wikidata.p[prop]

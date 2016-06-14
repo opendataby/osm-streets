@@ -1,0 +1,130 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1)",
+            "lang": "en"
+         },
+         "meter": [
+            "",
+            "meters"
+         ],
+         "Wikipedia": [
+            ""
+         ],
+         "Wikidata": [
+            ""
+         ],
+         "street": [
+            "",
+            "streets"
+         ],
+         "with summary length": [
+            ""
+         ],
+         "meter in": [
+            "",
+            "meters in"
+         ],
+         "Belarus Streets": [
+            ""
+         ],
+         "Map": [
+            ""
+         ],
+         "Filters": [
+            ""
+         ],
+         "Details": [
+            ""
+         ],
+         "Info": [
+            ""
+         ],
+         "prop\u0004city": [
+            ""
+         ],
+         "prop\u0004street name": [
+            ""
+         ],
+         "prop\u0004length": [
+            ""
+         ],
+         "prop\u0004instance": [
+            ""
+         ],
+         "prop\u0004sex": [
+            ""
+         ],
+         "prop\u0004birth date": [
+            ""
+         ],
+         "prop\u0004place of birth": [
+            ""
+         ],
+         "prop\u0004death date": [
+            ""
+         ],
+         "prop\u0004place of death": [
+            ""
+         ],
+         "prop\u0004citizenship": [
+            ""
+         ],
+         "prop\u0004occupation": [
+            ""
+         ],
+         "prop\u0004country": [
+            ""
+         ],
+         "prop\u0004inception date": [
+            ""
+         ],
+         "prop\u0004population": [
+            ""
+         ],
+         "prop_placeholder\u0004eg. Miensk": [
+            ""
+         ],
+         "prop_placeholder\u0004eg. Skaryny": [
+            ""
+         ],
+         "prop_placeholder\u0004from": [
+            ""
+         ],
+         "prop_placeholder\u0004to": [
+            ""
+         ],
+         "prop_placeholder\u0004eg. Minsk": [
+            ""
+         ],
+         "prop_placeholder\u0004eg. Belarus": [
+            ""
+         ],
+         "prop_placeholder\u0004eg. writer": [
+            ""
+         ],
+         "prop_instance_of_select\u0004human": [
+            ""
+         ],
+         "prop_instance_of_select\u0004city": [
+            ""
+         ],
+         "prop_sex_select\u0004any": [
+            ""
+         ],
+         "prop_sex_select\u0004male": [
+            ""
+         ],
+         "prop_sex_select\u0004female": [
+            ""
+         ],
+         "in\u0004city": [
+            "",
+            "cities"
+         ]
+      }
+   }
+}

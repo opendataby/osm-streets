@@ -6,10 +6,6 @@ import {
 } from '../constants'
 
 
-export function translate (translations, text) {
-  return translations && translations[text] || text
-}
-
 function mapToZoomLatLon (map) {
   if (!map) {
     return {

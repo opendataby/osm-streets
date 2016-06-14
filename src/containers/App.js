@@ -12,7 +12,7 @@ import * as panelActions from '../actions/PanelActions'
 
 class App extends Component {
   render () {
-    const {lang, data, cache, filters, streetId, lat, lon, zoom, panel} = this.props
+    const {lang, i18n, data, cache, filters, streetId, lat, lon, zoom, panel} = this.props
     const {positionChanged} = this.props.mapActions
     const {showDetails} = this.props.detailsActions
     const {updateFilters} = this.props.filtersActions
@@ -36,7 +36,8 @@ class App extends Component {
              streetId={ streetId }
              panel={ panel }
              filters={ filters }
-             data={ data }/>
+             data={ data }
+             i18n={i18n}/>
     </div>
   }
 

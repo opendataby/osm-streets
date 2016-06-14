@@ -1,0 +1,208 @@
+# Translations template for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-06-14 09:23+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: dist/bundle.js:1178
+msgctxt "prop"
+msgid "city"
+msgstr ""
+
+#: dist/bundle.js:1179
+msgctxt "prop"
+msgid "street name"
+msgstr ""
+
+#: dist/bundle.js:1180
+msgctxt "prop"
+msgid "length"
+msgstr ""
+
+#: dist/bundle.js:1181
+msgctxt "prop"
+msgid "instance"
+msgstr ""
+
+#: dist/bundle.js:1182
+msgctxt "prop"
+msgid "sex"
+msgstr ""
+
+#: dist/bundle.js:1183
+msgctxt "prop"
+msgid "birth date"
+msgstr ""
+
+#: dist/bundle.js:1184
+msgctxt "prop"
+msgid "place of birth"
+msgstr ""
+
+#: dist/bundle.js:1185
+msgctxt "prop"
+msgid "death date"
+msgstr ""
+
+#: dist/bundle.js:1186
+msgctxt "prop"
+msgid "place of death"
+msgstr ""
+
+#: dist/bundle.js:1187
+msgctxt "prop"
+msgid "citizenship"
+msgstr ""
+
+#: dist/bundle.js:1188
+msgctxt "prop"
+msgid "occupation"
+msgstr ""
+
+#: dist/bundle.js:1189
+msgctxt "prop"
+msgid "country"
+msgstr ""
+
+#: dist/bundle.js:1190
+msgctxt "prop"
+msgid "inception date"
+msgstr ""
+
+#: dist/bundle.js:1191
+msgctxt "prop"
+msgid "population"
+msgstr ""
+
+#: dist/bundle.js:1194
+msgctxt "prop_placeholder"
+msgid "eg. Miensk"
+msgstr ""
+
+#: dist/bundle.js:1195
+msgctxt "prop_placeholder"
+msgid "eg. Skaryny"
+msgstr ""
+
+#: dist/bundle.js:1196 dist/bundle.js:1197 dist/bundle.js:1199
+#: dist/bundle.js:1204 dist/bundle.js:1205
+msgctxt "prop_placeholder"
+msgid "from"
+msgstr ""
+
+#: dist/bundle.js:1196 dist/bundle.js:1197 dist/bundle.js:1199
+#: dist/bundle.js:1204 dist/bundle.js:1205
+msgctxt "prop_placeholder"
+msgid "to"
+msgstr ""
+
+#: dist/bundle.js:1198 dist/bundle.js:1200
+msgctxt "prop_placeholder"
+msgid "eg. Minsk"
+msgstr ""
+
+#: dist/bundle.js:1201 dist/bundle.js:1203
+msgctxt "prop_placeholder"
+msgid "eg. Belarus"
+msgstr ""
+
+#: dist/bundle.js:1202
+msgctxt "prop_placeholder"
+msgid "eg. writer"
+msgstr ""
+
+#: dist/bundle.js:1209
+msgctxt "prop_instance_of_select"
+msgid "human"
+msgstr ""
+
+#: dist/bundle.js:1210
+msgctxt "prop_instance_of_select"
+msgid "city"
+msgstr ""
+
+#: dist/bundle.js:1213
+msgctxt "prop_sex_select"
+msgid "any"
+msgstr ""
+
+#: dist/bundle.js:1214
+msgctxt "prop_sex_select"
+msgid "male"
+msgstr ""
+
+#: dist/bundle.js:1215
+msgctxt "prop_sex_select"
+msgid "female"
+msgstr ""
+
+#: dist/bundle.js:18235
+msgid "meter"
+msgid_plural "meters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/bundle.js:18239
+msgid "Wikipedia"
+msgstr ""
+
+#: dist/bundle.js:18239
+msgid "Wikidata"
+msgstr ""
+
+#: dist/bundle.js:18486
+msgid "street"
+msgid_plural "streets"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/bundle.js:18488
+msgid "with summary length"
+msgstr ""
+
+#: dist/bundle.js:18492
+msgid "meter in"
+msgid_plural "meters in"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/bundle.js:18496
+msgctxt "in"
+msgid "city"
+msgid_plural "cities"
+msgstr[0] ""
+msgstr[1] ""
+
+#: dist/bundle.js:18849
+msgid "Belarus Streets"
+msgstr ""
+
+#: dist/bundle.js:18871
+msgid "Map"
+msgstr ""
+
+#: dist/bundle.js:18877
+msgid "Filters"
+msgstr ""
+
+#: dist/bundle.js:18883
+msgid "Details"
+msgstr ""
+
+#: dist/bundle.js:18889
+msgid "Info"
+msgstr ""
+

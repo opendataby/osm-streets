@@ -6,7 +6,7 @@ html, body, #app, .app, .map {
 
 .panel {
     position: absolute;
-    width: 500px;
+    width: 525px;
     height: 100%;
     top: 0;
     right: 0;

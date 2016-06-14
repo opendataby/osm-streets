@@ -1,3 +1,5 @@
+function pgettext (context, key) { return [context, key] }
+
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE'
 export const SWITCH_PANEL= 'SWITCH_PANEL'
 export const MAP_POSITION_CHANGED = 'MAP_POSITION_CHANGED'
@@ -65,42 +67,42 @@ export const DETAILS = {
 }
 
 export const PROP_NAMES = {}
-PROP_NAMES[OSM_CITY] = 'city'
-PROP_NAMES[OSM_NAME] = 'street name'
-PROP_NAMES[OSM_LENGTH] = 'length'
-PROP_NAMES[PROP_INSTANCE_OF] = 'instance'
-PROP_NAMES[PROP_SEX] = 'sex'
-PROP_NAMES[PROP_BIRTH_DATE] = 'birth date'
-PROP_NAMES[PROP_BIRTH_PLACE] = 'place of birth'
-PROP_NAMES[PROP_DEATH_DATE] = 'death date'
-PROP_NAMES[PROP_DEATH_PLACE] = 'place of death'
-PROP_NAMES[PROP_CITIZENSHIP] = 'citizenship'
-PROP_NAMES[PROP_OCCUPATION] = 'occupation'
-PROP_NAMES[PROP_COUNTRY] = 'country'
-PROP_NAMES[PROP_INCEPTION_DATE] = 'inception date'
-PROP_NAMES[PROP_POPULATION] = 'population'
+PROP_NAMES[OSM_CITY] = pgettext('prop', 'city')
+PROP_NAMES[OSM_NAME] = pgettext('prop', 'street name')
+PROP_NAMES[OSM_LENGTH] = pgettext('prop', 'length')
+PROP_NAMES[PROP_INSTANCE_OF] = pgettext('prop', 'instance')
+PROP_NAMES[PROP_SEX] = pgettext('prop', 'sex')
+PROP_NAMES[PROP_BIRTH_DATE] = pgettext('prop', 'birth date')
+PROP_NAMES[PROP_BIRTH_PLACE] = pgettext('prop', 'place of birth')
+PROP_NAMES[PROP_DEATH_DATE] = pgettext('prop', 'death date')
+PROP_NAMES[PROP_DEATH_PLACE] = pgettext('prop', 'place of death')
+PROP_NAMES[PROP_CITIZENSHIP] = pgettext('prop', 'citizenship')
+PROP_NAMES[PROP_OCCUPATION] = pgettext('prop', 'occupation')
+PROP_NAMES[PROP_COUNTRY] = pgettext('prop', 'country')
+PROP_NAMES[PROP_INCEPTION_DATE] = pgettext('prop', 'inception date')
+PROP_NAMES[PROP_POPULATION] = pgettext('prop', 'population')
 
 export const PROP_PLACEHOLDERS = {}
-PROP_PLACEHOLDERS[OSM_CITY] = 'eg. Miensk'
-PROP_PLACEHOLDERS[OSM_NAME] = 'eg. Skaryny'
-PROP_PLACEHOLDERS[OSM_LENGTH] = ['from', 'to']
-PROP_PLACEHOLDERS[PROP_BIRTH_DATE] = ['from', 'to']
-PROP_PLACEHOLDERS[PROP_BIRTH_PLACE] = 'eg. Minsk'
-PROP_PLACEHOLDERS[PROP_DEATH_DATE] = ['from', 'to']
-PROP_PLACEHOLDERS[PROP_DEATH_PLACE] = 'eg. Minsk'
-PROP_PLACEHOLDERS[PROP_CITIZENSHIP] = 'eg. Belarus'
-PROP_PLACEHOLDERS[PROP_OCCUPATION] = 'eg. writer'
-PROP_PLACEHOLDERS[PROP_COUNTRY] = 'eg. Belarus'
-PROP_PLACEHOLDERS[PROP_INCEPTION_DATE] = ['from', 'to']
-PROP_PLACEHOLDERS[PROP_POPULATION] = ['from', 'to']
+PROP_PLACEHOLDERS[OSM_CITY] = pgettext('prop_placeholder', 'eg. Miensk')
+PROP_PLACEHOLDERS[OSM_NAME] = pgettext('prop_placeholder', 'eg. Skaryny')
+PROP_PLACEHOLDERS[OSM_LENGTH] = [pgettext('prop_placeholder', 'from'), pgettext('prop_placeholder', 'to')]
+PROP_PLACEHOLDERS[PROP_BIRTH_DATE] = [pgettext('prop_placeholder', 'from'), pgettext('prop_placeholder', 'to')]
+PROP_PLACEHOLDERS[PROP_BIRTH_PLACE] = pgettext('prop_placeholder', 'eg. Minsk')
+PROP_PLACEHOLDERS[PROP_DEATH_DATE] = [pgettext('prop_placeholder', 'from'), pgettext('prop_placeholder', 'to')]
+PROP_PLACEHOLDERS[PROP_DEATH_PLACE] = pgettext('prop_placeholder', 'eg. Minsk')
+PROP_PLACEHOLDERS[PROP_CITIZENSHIP] = pgettext('prop_placeholder', 'eg. Belarus')
+PROP_PLACEHOLDERS[PROP_OCCUPATION] = pgettext('prop_placeholder', 'eg. writer')
+PROP_PLACEHOLDERS[PROP_COUNTRY] = pgettext('prop_placeholder', 'eg. Belarus')
+PROP_PLACEHOLDERS[PROP_INCEPTION_DATE] = [pgettext('prop_placeholder', 'from'), pgettext('prop_placeholder', 'to')]
+PROP_PLACEHOLDERS[PROP_POPULATION] = [pgettext('prop_placeholder', 'from'), pgettext('prop_placeholder', 'to')]
 
 export const PROP_SELECTORS = {}
 PROP_SELECTORS[PROP_INSTANCE_OF] = {
-  'Q5': 'human',
-  'Q515': 'city',
+  'Q5': pgettext('prop_instance_of_select', 'human'),
+  'Q515': pgettext('prop_instance_of_select', 'city'),
 }
 PROP_SELECTORS[PROP_SEX] = {
-  '': 'any',
-  'Q6581097': 'male',
-  'Q6581072': 'female',
+  '': pgettext('prop_sex_select', 'any'),
+  'Q6581097': pgettext('prop_sex_select', 'male'),
+  'Q6581072': pgettext('prop_sex_select', 'female'),
 }

@@ -1,3 +1,5 @@
+import Jed from 'jed'
+
 import createLocation from 'history/lib/createLocation'
 import { PUSH, REPLACE } from 'history/lib/Actions'
 
@@ -26,6 +28,7 @@ const initialState = {
   lon: null,
   zoom: null,
   panel: PANEL_FILTERS,
+  i18n: new Jed({}),
 }
 
 
@@ -76,7 +79,13 @@ export default function rootReducer (state = initialState, {type, payload}) {
   switch (type) {
     case SET_LANGUAGE:
       if (payload) {
-        return updateLocationFromState({...state, data: payload, cache: {}, lang: payload.language})
+        return updateLocationFromState({
+          ...state,
+          data: payload,
+          cache: {},
+          lang: payload.language,
+          i18n: window.i18n = new Jed(payload.translations),
+        })
       }
       return state
 

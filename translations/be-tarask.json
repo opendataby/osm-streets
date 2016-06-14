@@ -1,0 +1,134 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)",
+            "lang": "be-tarask"
+         },
+         "meter": [
+            "метар",
+            "метры",
+            "метраў"
+         ],
+         "Wikipedia": [
+            "Вікіпэдыя"
+         ],
+         "Wikidata": [
+            "Вікідадзеныя"
+         ],
+         "street": [
+            "вуліца",
+            "вуліцы",
+            "вуліцаў"
+         ],
+         "with summary length": [
+            "агульнай даўжынёй"
+         ],
+         "meter in": [
+            "метар у",
+            "метры ў",
+            "метраў у"
+         ],
+         "Belarus Streets": [
+            "Вуліцы Беларусі"
+         ],
+         "Map": [
+            "Мапа"
+         ],
+         "Filters": [
+            "Фільтры"
+         ],
+         "Details": [
+            "Дэталі"
+         ],
+         "Info": [
+            "Аб праэкце"
+         ],
+         "prop\u0004city": [
+            "горад"
+         ],
+         "prop\u0004street name": [
+            "назва вуліцы"
+         ],
+         "prop\u0004length": [
+            "даўжыня"
+         ],
+         "prop\u0004instance": [
+            "тып"
+         ],
+         "prop\u0004sex": [
+            "стаць"
+         ],
+         "prop\u0004birth date": [
+            "дата нараджэньня"
+         ],
+         "prop\u0004place of birth": [
+            "месца нараджэньня"
+         ],
+         "prop\u0004death date": [
+            "дата сьмерці"
+         ],
+         "prop\u0004place of death": [
+            "месца сьмерці"
+         ],
+         "prop\u0004citizenship": [
+            "грамадзянства"
+         ],
+         "prop\u0004occupation": [
+            "занятак"
+         ],
+         "prop\u0004country": [
+            "краіна"
+         ],
+         "prop\u0004inception date": [
+            "дата заснаваньня"
+         ],
+         "prop\u0004population": [
+            "колькасьць насельніцтва"
+         ],
+         "prop_placeholder\u0004eg. Miensk": [
+            "напрыклад Менск"
+         ],
+         "prop_placeholder\u0004eg. Skaryny": [
+            "напрыклад Скарыны"
+         ],
+         "prop_placeholder\u0004from": [
+            "з"
+         ],
+         "prop_placeholder\u0004to": [
+            "па"
+         ],
+         "prop_placeholder\u0004eg. Minsk": [
+            "напрыклад Менск"
+         ],
+         "prop_placeholder\u0004eg. Belarus": [
+            "напрыклад Беларусь"
+         ],
+         "prop_placeholder\u0004eg. writer": [
+            "напрыклад пісьменьнік"
+         ],
+         "prop_instance_of_select\u0004human": [
+            "асоба"
+         ],
+         "prop_instance_of_select\u0004city": [
+            "горад"
+         ],
+         "prop_sex_select\u0004any": [
+            "любая"
+         ],
+         "prop_sex_select\u0004male": [
+            "мыжчынская"
+         ],
+         "prop_sex_select\u0004female": [
+            "жаночая"
+         ],
+         "in\u0004city": [
+            "горадзе",
+            "гарадох",
+            "гарадох"
+         ]
+      }
+   }
+}

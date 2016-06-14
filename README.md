@@ -16,5 +16,10 @@ http://opendataby.github.io/osm-streets/
     npm install
     ./node_modules/.bin/webpack
 
+## Update translations
+    bash translations_extract.sh
+    # update *.po files in `translations` folder
+    bash translations_po2json.sh
+
 ## License
 Sources - [MIT](https://raw.githubusercontent.com/opendataby/osm_streets/gh-pages/LICENSE.txt), OSM data - [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright), Wikidata - [CC BY-SA](https://creativecommons.org/licenses/by-sa/3.0/) [Wikidata](https://www.wikidata.org/)
