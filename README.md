@@ -22,5 +22,11 @@ http://opendataby.github.io/osm-streets/
     # update *.po files in `translations` folder
     bash translations_po2json.sh
 
+## Generate data
+    # required osm database
+    # processed localy from http://data.gis-lab.info/osm_dump/dump/latest/BY.osm.pbf
+    # with `osm2pgsql -c -j -G -l -C --prefix=osm` import settings
+    python main.py -h 127.0.0.1 -U user -W password osm
+
 ## License
 Sources - [MIT](https://raw.githubusercontent.com/opendataby/osm_streets/gh-pages/LICENSE.txt), OSM data - [© OpenStreetMap contributors](https://www.openstreetmap.org/copyright), Wikidata - [CC BY-SA](https://creativecommons.org/licenses/by-sa/3.0/) [Wikidata](https://www.wikidata.org/)
