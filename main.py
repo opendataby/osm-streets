@@ -776,7 +776,7 @@ def main(cursor):
                          for k, v in tags.items()), osm_id) for osm_id, tags in results.items())))
         data = list(cursor.fetchall())
         with open('cache/_data.json', 'w') as f:
-            json.dump(data, f, indent=2, sort_keys=True)
+            json.dump(data, f, indent=2, sort_keys=True, ensure_ascii=False)
     print(len(data))
 
     i = 0
