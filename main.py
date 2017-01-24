@@ -186,9 +186,11 @@ class RefItem(BaseItem):
             assert len(self.property_value['mainsnak']['datavalue']) == 2
             assert self.property_value['mainsnak']['datavalue']['type'] == 'wikibase-entityid'
 
-            assert len(self.property_value['mainsnak']['datavalue']['value']) == 2
+            assert len(self.property_value['mainsnak']['datavalue']['value']) == 3
             assert self.property_value['mainsnak']['datavalue']['value']['entity-type'] == 'item'
             assert isinstance(self.property_value['mainsnak']['datavalue']['value']['numeric-id'], int)
+            assert ('Q{}'.format(self.property_value['mainsnak']['datavalue']['value']['numeric-id']) ==
+                    self.property_value['mainsnak']['datavalue']['value']['id'])
 
     def to_json(self):
         if self.is_unknown():
@@ -280,15 +282,15 @@ class DateItem(BaseItem):
         match = self.date_pattern.match(date)
         year, month, day = [int(g) for g in match.groups()]
         if precision == self.PRECISION_DAY:
-            assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES}
+            # assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES}
             if calendarmodel == 'http://www.wikidata.org/entity/Q1985786':
                 year, month, day = self.julian2gregorian(year, month, day)
             return ['{:4d}-{:02d}-{:02d}'.format(year, month, day)]
         if precision == self.PRECISION_MONTH:
-            assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES}
+            # assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES}
             return ['{:4d}-{:02d}'.format(year, month)]
         if precision == self.PRECISION_YEAR:
-            assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES}
+            # assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES}
             return ['{:4d}'.format(year)]
         if precision == self.PRECISION_10_YEARS:
             assert year % 10 == 0
@@ -313,7 +315,8 @@ class DateItem(BaseItem):
                 date_end = dates[0]
             return [date_start, date_end]
         if precision == self.PRECISION_100_YEARS:
-            assert year % 100 == 0
+            assert year % 100 in (0, 1)
+            year -= year % 100
             assert not qualifiers or not set(qualifiers) - {self.PROPERTY_CIRCUMSTANCES,
                                                             self.PROPERTY_START,
                                                             self.PROPERTY_END}
@@ -761,13 +764,21 @@ def main(cursor):
         WHERE wikidata IS NOT NULL
     """
 
-    results = get_relation_streets()
-    cursor.execute(sql.format(''.join(
-        """\n UNION SELECT osm_id, '{}'::hstore || tags, way FROM osm_line WHERE osm_id = {}""".format(
-            ','.join('"{}"=>"{}"'.format(k, v.replace("'", "''"))
-                     for k, v in tags.items()), osm_id) for osm_id, tags in results.items())))
-    data = list(cursor.fetchall())
+    if os.path.exists('cache/_data.json'):
+        with open('cache/_data.json') as f:
+            data = json.load(f)
+    else:
+
+        results = get_relation_streets()
+        cursor.execute(sql.format(''.join(
+            """\n UNION SELECT osm_id, '{}'::hstore || tags, way FROM osm_line WHERE osm_id = {}""".format(
+                ','.join('"{}"=>"{}"'.format(k, v.replace("'", "''"))
+                         for k, v in tags.items()), osm_id) for osm_id, tags in results.items())))
+        data = list(cursor.fetchall())
+        with open('cache/_data.json', 'w') as f:
+            json.dump(data, f, indent=2, sort_keys=True)
     print(len(data))
+
     i = 0
     result, wd_items, wd_properties = {}, {}, {}
     err = defaultdict(set)
